@@ -1,5 +1,5 @@
 Output/Release/Obj/saadc_pca10056/nrf_fprintf.o: \
- C:\nRF5_SDK_15.3.0_59ac345\external\fprintf\nrf_fprintf.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\external\fprintf\nrf_fprintf.c \
  ../../../../../../components/libraries/util/sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdbool.h \
@@ -29,5 +29,5 @@ Output/Release/Obj/saadc_pca10056/nrf_fprintf.o: \
  ../../../../../../components/libraries/util/nrf_assert.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdarg.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
- C:\nRF5_SDK_15.3.0_59ac345\external\fprintf\nrf_fprintf_format.h \
- C:\nRF5_SDK_15.3.0_59ac345\external\fprintf\nrf_fprintf.h
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\external\fprintf\nrf_fprintf_format.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\external\fprintf\nrf_fprintf.h

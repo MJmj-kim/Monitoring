@@ -1,8 +1,8 @@
 Output/Release/Obj/saadc_pca10056/SEGGER_RTT_Syscalls_SES.o: \
- C:\nRF5_SDK_15.3.0_59ac345\external\segger_rtt\SEGGER_RTT_Syscalls_SES.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\external\segger_rtt\SEGGER_RTT_Syscalls_SES.c \
  ../config/sdk_config.h \
- C:\nRF5_SDK_15.3.0_59ac345\external\segger_rtt\SEGGER_RTT.h \
- C:\nRF5_SDK_15.3.0_59ac345\external\segger_rtt\SEGGER_RTT_Conf.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\external\segger_rtt\SEGGER_RTT.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\external\segger_rtt\SEGGER_RTT_Conf.h \
  ../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../components/libraries/util/app_util_platform.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdint.h \

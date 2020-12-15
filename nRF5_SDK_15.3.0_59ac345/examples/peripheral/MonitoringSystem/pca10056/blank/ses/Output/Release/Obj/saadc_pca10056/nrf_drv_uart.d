@@ -1,6 +1,6 @@
 Output/Release/Obj/saadc_pca10056/nrf_drv_uart.o: \
- C:\nRF5_SDK_15.3.0_59ac345\integration\nrfx\legacy\nrf_drv_uart.c \
- C:\nRF5_SDK_15.3.0_59ac345\integration\nrfx\legacy\nrf_drv_uart.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\integration\nrfx\legacy\nrf_drv_uart.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\integration\nrfx\legacy\nrf_drv_uart.h \
  ../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../integration/nrfx/nrfx_config.h ../config/sdk_config.h \
  ../../../../../../modules/nrfx/drivers/nrfx_common.h \

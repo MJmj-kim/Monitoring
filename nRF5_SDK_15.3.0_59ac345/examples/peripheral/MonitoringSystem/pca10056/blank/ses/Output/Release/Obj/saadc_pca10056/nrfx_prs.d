@@ -1,5 +1,5 @@
 Output/Release/Obj/saadc_pca10056/nrfx_prs.o: \
- C:\nRF5_SDK_15.3.0_59ac345\modules\nrfx\drivers\src\prs\nrfx_prs.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\modules\nrfx\drivers\src\prs\nrfx_prs.c \
  ../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../integration/nrfx/nrfx_config.h ../config/sdk_config.h \
  ../../../../../../modules/nrfx/drivers/nrfx_common.h \
@@ -42,7 +42,7 @@ Output/Release/Obj/saadc_pca10056/nrfx_prs.o: \
  ../../../../../../components/libraries/util/sdk_errors.h \
  ../../../../../../components/libraries/util/sdk_resources.h \
  ../../../../../../modules/nrfx/drivers/nrfx_errors.h \
- C:\nRF5_SDK_15.3.0_59ac345\modules\nrfx\drivers\src\prs\nrfx_prs.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\modules\nrfx\drivers\src\prs\nrfx_prs.h \
  ../../../../../../integration/nrfx/nrfx_log.h \
  ../../../../../../components/libraries/log/nrf_log.h \
  ../../../../../../components/libraries/util/sdk_common.h \

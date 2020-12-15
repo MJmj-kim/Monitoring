@@ -1,5 +1,5 @@
 Output/Release/Obj/saadc_pca10056/nrf_log_backend_rtt.o: \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\log\src\nrf_log_backend_rtt.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\log\src\nrf_log_backend_rtt.c \
  ../../../../../../components/libraries/util/sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdbool.h \

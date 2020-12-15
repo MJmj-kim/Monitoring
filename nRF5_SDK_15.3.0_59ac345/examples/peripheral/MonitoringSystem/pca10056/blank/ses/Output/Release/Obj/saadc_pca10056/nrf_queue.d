@@ -1,5 +1,5 @@
 Output/Release/Obj/saadc_pca10056/nrf_queue.o: \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\queue\nrf_queue.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\queue\nrf_queue.c \
  ../../../../../../components/libraries/util/sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdbool.h \
@@ -27,7 +27,7 @@ Output/Release/Obj/saadc_pca10056/nrf_queue.o: \
  ../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
  ../../../../../../components/libraries/util/sdk_macros.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\queue\nrf_queue.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\queue\nrf_queue.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
  ../../../../../../components/libraries/util/sdk_errors.h \
  ../../../../../../components/libraries/util/app_util.h \

@@ -1,6 +1,6 @@
 Output/Release/Obj/saadc_pca10056/nrf_drv_ppi.o: \
- C:\nRF5_SDK_15.3.0_59ac345\integration\nrfx\legacy\nrf_drv_ppi.c \
- C:\nRF5_SDK_15.3.0_59ac345\integration\nrfx\legacy\nrf_drv_ppi.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\integration\nrfx\legacy\nrf_drv_ppi.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\integration\nrfx\legacy\nrf_drv_ppi.h \
  ../../../../../../modules/nrfx/drivers/include/nrfx_ppi.h \
  ../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../integration/nrfx/nrfx_config.h ../config/sdk_config.h \

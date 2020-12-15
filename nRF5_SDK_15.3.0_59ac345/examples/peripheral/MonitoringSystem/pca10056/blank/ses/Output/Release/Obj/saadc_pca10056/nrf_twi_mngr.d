@@ -1,5 +1,5 @@
 Output/Release/Obj/saadc_pca10056/nrf_twi_mngr.o: \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\twi_mngr\nrf_twi_mngr.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\twi_mngr\nrf_twi_mngr.c \
  ../../../../../../components/libraries/util/sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdbool.h \
@@ -27,7 +27,7 @@ Output/Release/Obj/saadc_pca10056/nrf_twi_mngr.o: \
  ../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
  ../../../../../../components/libraries/util/sdk_macros.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\twi_mngr\nrf_twi_mngr.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\twi_mngr\nrf_twi_mngr.h \
  ../../../../../../integration/nrfx/legacy/nrf_drv_twi.h \
  ../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../integration/nrfx/nrfx_config.h \

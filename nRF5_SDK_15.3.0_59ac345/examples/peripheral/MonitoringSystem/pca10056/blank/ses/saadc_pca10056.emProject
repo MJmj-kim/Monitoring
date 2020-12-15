@@ -106,8 +106,8 @@
       <file file_name="../../../../../../modules/nrfx/mdk/system_nrf52840.c" />
     </folder>
     <folder Name="ADD_twi_sensor">
-      <file file_name="../../../../twi_master_ADSL345/Segger Example/components/libraries/twi_sensor/nrf_twi_sensor.c" />
-      <file file_name="../../../../twi_master_ADSL345/Segger Example/components/libraries/twi_sensor/nrf_twi_sensor.h" />
+      <file file_name="../../../../../../components/libraries/twi_sensor/nrf_twi_sensor.c" />
+      <file file_name="../../../../../../components/libraries/twi_sensor/nrf_twi_sensor.h" />
     </folder>
     <folder Name="ADD_ii2dlpc_reg">
       <file file_name="C:/kmj/iis2dlpc_reg/iis2dlpc_reg.c" />

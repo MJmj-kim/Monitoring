@@ -1,6 +1,6 @@
 Output/Release/Obj/saadc_pca10056/nrfx_atomic.o: \
- C:\nRF5_SDK_15.3.0_59ac345\modules\nrfx\soc\nrfx_atomic.c \
- C:\nRF5_SDK_15.3.0_59ac345\modules\nrfx\soc\nrfx_atomic.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\modules\nrfx\soc\nrfx_atomic.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\modules\nrfx\soc\nrfx_atomic.h \
  ../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../integration/nrfx/nrfx_config.h ../config/sdk_config.h \
  ../../../../../../modules/nrfx/drivers/nrfx_common.h \
@@ -43,4 +43,4 @@ Output/Release/Obj/saadc_pca10056/nrfx_atomic.o: \
  ../../../../../../components/libraries/util/sdk_errors.h \
  ../../../../../../components/libraries/util/sdk_resources.h \
  ../../../../../../modules/nrfx/drivers/nrfx_errors.h \
- C:\nRF5_SDK_15.3.0_59ac345\modules\nrfx\soc\nrfx_atomic_internal.h
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\modules\nrfx\soc\nrfx_atomic_internal.h

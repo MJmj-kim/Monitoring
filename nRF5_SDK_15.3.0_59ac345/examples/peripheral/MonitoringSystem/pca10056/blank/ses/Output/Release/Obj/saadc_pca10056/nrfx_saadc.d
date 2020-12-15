@@ -1,5 +1,5 @@
 Output/Release/Obj/saadc_pca10056/nrfx_saadc.o: \
- C:\nRF5_SDK_15.3.0_59ac345\modules\nrfx\drivers\src\nrfx_saadc.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\modules\nrfx\drivers\src\nrfx_saadc.c \
  ../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../integration/nrfx/nrfx_config.h ../config/sdk_config.h \
  ../../../../../../modules/nrfx/drivers/nrfx_common.h \

@@ -1,5 +1,5 @@
 Output/Release/Obj/saadc_pca10056/main.o: \
- C:\nRF5_SDK_15.3.0_59ac345\examples\peripheral\saadc\ -\ MonitoringSystem\main.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\examples\peripheral\MonitoringSystem\main.c \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdbool.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdio.h \
@@ -78,7 +78,7 @@ Output/Release/Obj/saadc_pca10056/main.o: \
  ../../../../../../integration/nrfx/legacy/nrf_drv_timer.h \
  ../../../../../../modules/nrfx/drivers/include/nrfx_timer.h \
  ../../../../../../modules/nrfx/hal/nrf_timer.h \
- c:\kmj\iis2dlpc_reg\iis2dlpc_reg.h \
+ c:\monitoring\kmj\iis2dlpc_reg\iis2dlpc_reg.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/math.h \
  ../../../../../../modules/nrfx/hal/nrf_twi.h \
  ../../../../../../components/libraries/twi_mngr/nrf_twi_mngr.h \

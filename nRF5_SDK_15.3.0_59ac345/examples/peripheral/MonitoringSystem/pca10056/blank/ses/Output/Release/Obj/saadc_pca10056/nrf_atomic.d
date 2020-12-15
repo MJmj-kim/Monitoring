@@ -1,6 +1,6 @@
 Output/Release/Obj/saadc_pca10056/nrf_atomic.o: \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\atomic\nrf_atomic.c \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\atomic\nrf_atomic.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\atomic\nrf_atomic.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\atomic\nrf_atomic.h \
  ../../../../../../components/libraries/util/sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdbool.h \
@@ -28,4 +28,4 @@ Output/Release/Obj/saadc_pca10056/nrf_atomic.o: \
  ../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
  ../../../../../../components/libraries/util/sdk_macros.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\atomic\nrf_atomic_internal.h
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\atomic\nrf_atomic_internal.h

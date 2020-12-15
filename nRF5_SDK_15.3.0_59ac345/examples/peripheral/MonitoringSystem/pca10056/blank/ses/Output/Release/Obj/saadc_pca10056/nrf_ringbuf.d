@@ -1,6 +1,6 @@
 Output/Release/Obj/saadc_pca10056/nrf_ringbuf.o: \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\ringbuf\nrf_ringbuf.c \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\ringbuf\nrf_ringbuf.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\ringbuf\nrf_ringbuf.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\ringbuf\nrf_ringbuf.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdint.h \
  ../../../../../../components/libraries/atomic/nrf_atomic.h \
  ../../../../../../components/libraries/util/sdk_common.h \

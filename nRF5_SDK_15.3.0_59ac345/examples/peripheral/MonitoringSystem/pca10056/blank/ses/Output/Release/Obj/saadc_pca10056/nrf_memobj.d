@@ -1,6 +1,6 @@
 Output/Release/Obj/saadc_pca10056/nrf_memobj.o: \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\memobj\nrf_memobj.c \
- C:\nRF5_SDK_15.3.0_59ac345\components\libraries\memobj\nrf_memobj.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\memobj\nrf_memobj.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\memobj\nrf_memobj.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdlib.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/__crossworks.h \

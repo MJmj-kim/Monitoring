@@ -1,6 +1,6 @@
 Output/Release/Obj/saadc_pca10056/boards.o: \
- C:\nRF5_SDK_15.3.0_59ac345\components\boards\boards.c \
- C:\nRF5_SDK_15.3.0_59ac345\components\boards\boards.h \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\boards\boards.c \
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\boards\boards.h \
  ../../../../../../modules/nrfx/hal/nrf_gpio.h \
  ../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../integration/nrfx/nrfx_config.h ../config/sdk_config.h \
@@ -44,4 +44,4 @@ Output/Release/Obj/saadc_pca10056/boards.o: \
  ../../../../../../components/libraries/util/sdk_errors.h \
  ../../../../../../components/libraries/util/sdk_resources.h \
  ../../../../../../modules/nrfx/drivers/nrfx_errors.h \
- C:\nRF5_SDK_15.3.0_59ac345\components\boards\pca10056.h
+ C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\boards\pca10056.h
