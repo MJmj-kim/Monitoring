@@ -1,0 +1,118 @@
+<!DOCTYPE CrossStudio_Session_File>
+<session>
+ <Bookmarks/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <BreakpointListItem trigger="" line="1" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../main.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="260" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/libraries/atomic/nrf_atomic.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="1387" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../config/sdk_config.h" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="492" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../config/sdk_config.h" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="497" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../config/sdk_config.h" useHWbreakpoint="false"/>
+  <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
+ </Breakpoints>
+ <ExecutionProfileWindow/>
+ <FrameBufferWindow>
+  <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
+ </FrameBufferWindow>
+ <Memory1>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="twi_master_using_nrf_twi_mngr_pca10056" radix="16" sizeText="" addressText=""/>
+ </Memory1>
+ <Memory2>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="twi_master_using_nrf_twi_mngr_pca10056" radix="16" sizeText="" addressText=""/>
+ </Memory2>
+ <Memory3>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="twi_master_using_nrf_twi_mngr_pca10056" radix="16" sizeText="" addressText=""/>
+ </Memory3>
+ <Memory4>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="twi_master_using_nrf_twi_mngr_pca10056" radix="16" sizeText="" addressText=""/>
+ </Memory4>
+ <Project>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056;Application"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056;Board Definition"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056;Board Support"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056;iis2dlpc_reg"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056;None"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056;nRF_Drivers"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056;nRF_Libraries"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056;nRF_Log"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056;nRF_Segger_RTT"/>
+  <ProjectSessionItem path="twi_master_using_nrf_twi_mngr_pca10056;twi_master_using_nrf_twi_mngr_pca10056;twi_sensor"/>
+ </Project>
+ <Register1>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="twi_master_using_nrf_twi_mngr_pca10056" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register1>
+ <Register2>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="twi_master_using_nrf_twi_mngr_pca10056" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register2>
+ <Register3>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="twi_master_using_nrf_twi_mngr_pca10056" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register3>
+ <Register4>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="twi_master_using_nrf_twi_mngr_pca10056" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register4>
+ <Threads>
+  <ThreadsWindow showLists=""/>
+ </Threads>
+ <TraceWindow>
+  <Trace enabled="Yes"/>
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" update="Never"/>
+ </Watch1>
+ <Watch2>
+  <Watches active="0" update="Never"/>
+ </Watch2>
+ <Watch3>
+  <Watches active="0" update="Never"/>
+ </Watch3>
+ <Watch4>
+  <Watches active="0" update="Never"/>
+ </Watch4>
+ <Files>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="787" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="C:/kmj/iis2dlpc_reg/iis2dlpc_reg.c" selected="0" top="756" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="117" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="C:/kmj/iis2dlpc_reg/iis2dlpc_reg.h" selected="0" top="76" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="50" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../mma7660.c" selected="0" top="21" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="101" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../mma7660.h" selected="0" top="74" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="232" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/twi_mngr/nrf_twi_mngr.h" selected="0" top="203" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="260" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/twi_mngr/nrf_twi_mngr.c" selected="0" top="219" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="103" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/components/libraries/twi_mngr/nrf_twi_mngr.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/nrf_assert.h" selected="0" top="75" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="157" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/sdk_errors.h" selected="0" top="130" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="100" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/log/nrf_log_ctrl.h" selected="0" top="68" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="166" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_error.h" selected="0" top="134" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="65" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/components/libraries/util/app_error.h" useBinaryEdit="0" left="0" path="../../../../../../components/drivers_nrf/nrf_soc_nosd/nrf_error.h" selected="0" top="39" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="63" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/components/libraries/util/app_error.h" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_error.c" selected="0" top="37" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="207" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/boards/boards.c" selected="0" top="147" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/integration/nrfx/legacy/nrf_drv_twi.c" useBinaryEdit="0" left="0" path="../../../../../../modules/nrfx/hal/nrf_gpio.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="151" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/boards/pca10056.h" selected="0" top="108" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="975" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/timer/app_timer.c" selected="0" top="940" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="186" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/components/libraries/pwr_mgmt/nrf_pwr_mgmt.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_util_platform.h" selected="0" top="160" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="24" y="4334" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../config/sdk_config.h" selected="0" top="4110" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="71" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../modules/nrfx/mdk/ses_startup_nrf52840.s" selected="0" top="45" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="197" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/twi_sensor/nrf_twi_sensor.h" selected="0" top="150" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="33" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../lm75b.c" selected="0" top="48" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="29" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.20/include/stdio.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="80" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/components/libraries/pwr_mgmt/nrf_pwr_mgmt.c" useBinaryEdit="0" left="0" path="../../../../../../modules/nrfx/drivers/src/prs/nrfx_prs.c" selected="0" top="46" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="323" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/pwr_mgmt/nrf_pwr_mgmt.c" selected="0" top="282" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="292" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.20/source/thumb_crt0.s" selected="0" top="277" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="845" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/log/src/nrf_log_frontend.c" selected="0" top="812" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="395" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../external/fprintf/nrf_fprintf_format.c" selected="0" top="365" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="259" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/atomic/nrf_atomic.c" selected="0" top="226" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="260" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/components/libraries/atomic/nrf_atomic.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/atomic/nrf_atomic_internal.h" selected="0" top="232" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="162" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/components/libraries/atomic/nrf_atomic.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/atomic/nrf_atomic.h" selected="0" top="141" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/components/libraries/atomic/nrf_atomic.h" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/sdk_common.h" selected="0" top="24" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="51" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/log/src/nrf_log_backend_serial.c" selected="0" top="51" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="94" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/log/src/nrf_log_backend_uart.c" selected="0" top="61" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="42" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../integration/nrfx/legacy/nrf_drv_twi.c" selected="0" top="13" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="118" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/integration/nrfx/legacy/nrf_drv_twi.c" useBinaryEdit="0" left="0" path="../../../../../../integration/nrfx/legacy/nrf_drv_twi.h" selected="0" top="84" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="40" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../modules/nrfx/drivers/src/nrfx_twi.c" selected="0" top="30" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="46" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/modules/nrfx/drivers/src/nrfx_twi.c" useBinaryEdit="0" left="0" path="../../../../../../modules/nrfx/nrfx.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="34" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/modules/nrfx/nrfx.h" useBinaryEdit="0" left="0" path="../../../../../../integration/nrfx/nrfx_config.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="72" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/modules/nrfx/nrfx.h" useBinaryEdit="0" left="0" path="../../../../../../modules/nrfx/drivers/nrfx_errors.h" selected="0" top="39" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="127" useTextEdit="1" openedFrom="C:/nRF5_SDK_15.3.0_59ac345/examples/peripheral/twi_master_using_nrf_twi_mngr/main.c" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/timer/app_timer.h" selected="0" top="101" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="253" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="221" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="492" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../external/segger_rtt/SEGGER_RTT.c" selected="0" top="460" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="27" y="51" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_util_platform.c" selected="0" top="41" codecName=""/>
+ </Files>
+ <ARMCrossStudioWindow activeProject="twi_master_using_nrf_twi_mngr_pca10056" fileDialogDefaultFilter="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.hxx" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
+</session>

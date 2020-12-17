@@ -48,7 +48,7 @@
  * This application uses the @ref srvlib_conn_params module.
  */
 
-
+#include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
 #include "nordic_common.h"
@@ -79,10 +79,36 @@
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
+#include "app_error.h"
+#include "boards.h"
+#include "nrf_delay.h"
 
+
+
+/*saadc Header*/
+#include "nrf.h"
+#include "nrf_drv_saadc.h"
+#include "nrf_drv_ppi.h"
+#include "nrf_drv_timer.h"
+
+/*iisdlpc Header*/
+#include "iis2dlpc_reg.h"
+#include "nrf_twi.h" //to use twi_mngr
+#include "nrf_twi_mngr.h"// to use twi_sensor
+#include "nrf_twi_sensor.h" // to read and write value over register of iis2dlpc sensor
+#include "nrf_drv_twi.h" //to use twi_mngr
+#include "compiler_abstraction.h"
+#include "app_timer.h"
+
+
+
+
+
+
+/*ble*/
 #define APP_BLE_CONN_CFG_TAG            1                                           /**< A tag identifying the SoftDevice BLE configuration. */
 
-#define DEVICE_NAME                     "Nordic_UART"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                     "Nordic_UART-MJ"                               /**< Name of device. Will be included in the advertising data. */
 #define NUS_SERVICE_UUID_TYPE           BLE_UUID_TYPE_VENDOR_BEGIN                  /**< UUID type for the Nordic UART Service (vendor specific). */
 
 #define APP_BLE_OBSERVER_PRIO           3                                           /**< Application's BLE observer priority. You shouldn't need to modify this value. */
@@ -104,7 +130,6 @@
 #define UART_TX_BUF_SIZE                256                                         /**< UART TX buffer size. */
 #define UART_RX_BUF_SIZE                256                                         /**< UART RX buffer size. */
 
-
 BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);                                   /**< BLE NUS service instance. */
 NRF_BLE_GATT_DEF(m_gatt);                                                           /**< GATT module instance. */
 NRF_BLE_QWR_DEF(m_qwr);                                                             /**< Context for the Queued Write module.*/
@@ -117,6 +142,45 @@ static ble_uuid_t m_adv_uuids[]          =                                      
     {BLE_UUID_NUS_SERVICE, NUS_SERVICE_UUID_TYPE}
 };
 
+
+/* LED pin */
+#define LED NRF_GPIO_PIN_MAP(1, 15)  // LED pin
+
+
+/* saadc define */
+#define SAMPLES_IN_BUFFER 2
+volatile uint8_t state = 1;
+
+static const nrf_drv_timer_t m_timer = NRF_DRV_TIMER_INSTANCE(0);
+static nrf_saadc_value_t     m_buffer_pool[2][SAMPLES_IN_BUFFER];
+static nrf_ppi_channel_t     m_ppi_channel;
+static uint32_t              m_adc_evt_counter;
+
+
+/* iisdlpc define */
+#define TWI_INSTANCE_ID             0
+#define MAX_PENDING_TRANSACTIONS    4 
+
+static int16_t               data_raw_acceleration[3];               /**< Load raw data from iis2dlpc sensor into this variable. */ 
+static stmdev_ctx_t          dev_ctx;                                /**< Handle iis2dlpc sensor's read/write instance with this variable. */
+static uint8_t               whoamI, rst;                            /**< Validate iis2dlpc sensor address and status to use. */ 
+static float acceleration_mg[3];                                     /**< Convert raw data to float(usable) data into this variable by using iis2dlpc sdk. */
+static uint8_t tx_buffer[1000];                                       /**< Maximum numbers of pending transactions. */
+#define II_ADDR (0x33U >>1)                                          /**< IIS2DLPC Sensor Adress. */
+                            
+
+
+//Macro that simplifies defining a TWI transaction manager instance
+NRF_TWI_MNGR_DEF(m_nrf_twi_mngr, MAX_PENDING_TRANSACTIONS, 0);                          /**< TWI transaction manager instance. */
+//Macro creating common twi sensor instance
+NRF_TWI_SENSOR_DEF(m_nrf_twi_sensor, &m_nrf_twi_mngr, NRF_TWI_SENSOR_SEND_BUF_SIZE);    /**< TWI sensor instance. */
+
+//NRF_TWI_MNGR_DEF(m_nrf_twi_mngr, MAX_PENDING_TRANSACTIONS, TWI_INSTANCE_ID);
+APP_TIMER_DEF(mnn_timer);
+
+
+
+char CRIME[] = "DANGER"; 
 
 /**@brief Function for assert macro callback.
  *
@@ -518,12 +582,13 @@ void bsp_event_handler(bsp_event_t event)
  *          'new line' '\n' (hex 0x0A) or if the string has reached the maximum data length.
  */
 /**@snippet [Handling the data received over UART] */
+
 void uart_event_handle(app_uart_evt_t * p_event)
 {
     static uint8_t data_array[BLE_NUS_MAX_DATA_LEN];
     static uint8_t index = 0;
     uint32_t       err_code;
-
+/*
     switch (p_event->evt_type)
     {
         case APP_UART_DATA_READY:
@@ -567,6 +632,7 @@ void uart_event_handle(app_uart_evt_t * p_event)
         default:
             break;
     }
+    */
 }
 /**@snippet [Handling the data received over UART] */
 
@@ -692,6 +758,285 @@ static void advertising_start(void)
 }
 
 
+
+/* saadc funtion */
+void timer_handler(nrf_timer_event_t event_type, void * p_context)
+{
+  
+}
+
+void saadc_sampling_event_init(void) 
+{
+    ret_code_t err_code;
+
+    err_code = nrf_drv_ppi_init();
+    APP_ERROR_CHECK(err_code);
+
+    nrf_drv_timer_config_t timer_cfg = NRF_DRV_TIMER_DEFAULT_CONFIG;
+    timer_cfg.bit_width = NRF_TIMER_BIT_WIDTH_32;
+    err_code = nrf_drv_timer_init(&m_timer, &timer_cfg, timer_handler);
+    APP_ERROR_CHECK(err_code);
+
+    /* setup m_timer for compare event every 400ms */
+    uint32_t ticks = nrf_drv_timer_ms_to_ticks(&m_timer, 1000);
+    nrf_drv_timer_extended_compare(&m_timer,
+                                   NRF_TIMER_CC_CHANNEL0,
+                                   ticks,
+                                   NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK,
+                                   false);
+    nrf_drv_timer_enable(&m_timer);
+
+    uint32_t timer_compare_event_addr = nrf_drv_timer_compare_event_address_get(&m_timer,
+                                                                                NRF_TIMER_CC_CHANNEL0);
+
+    uint32_t saadc_sample_task_addr   = nrf_drv_saadc_sample_task_get();
+
+    /* setup ppi channel so that timer compare event is triggering sample task in SAADC */
+    err_code = nrf_drv_ppi_channel_alloc(&m_ppi_channel);
+    APP_ERROR_CHECK(err_code);
+
+    err_code = nrf_drv_ppi_channel_assign(m_ppi_channel,
+                                          timer_compare_event_addr,
+                                          saadc_sample_task_addr);
+    APP_ERROR_CHECK(err_code);
+}
+
+
+void saadc_sampling_event_enable(void)
+{
+    ret_code_t err_code = nrf_drv_ppi_channel_enable(m_ppi_channel);
+
+    APP_ERROR_CHECK(err_code);
+}
+
+
+
+void saadc_callback(nrf_drv_saadc_evt_t const * p_event)
+{
+  float H,T;
+  
+    if (p_event->type == NRF_DRV_SAADC_EVT_DONE)
+    {
+        ret_code_t err_code;
+
+        err_code = nrf_drv_saadc_buffer_convert(p_event->data.done.p_buffer, SAMPLES_IN_BUFFER);
+        APP_ERROR_CHECK(err_code);
+
+        int i;
+       // NRF_LOG_INFO("ADC event number: %d", (int)m_adc_evt_counter);
+
+        int VT = p_event->data.done.p_buffer[0];
+        int VH =p_event->data.done.p_buffer[1];
+
+        float outdata = (float)VT * 3.6/1023;
+        T = -66.875 + 218.75 * outdata/3.3;
+
+        outdata = (float)VH * 3.6/1023;
+        H = -12.5 + 125*outdata/3.3;    
+       
+
+       /* for debug Humidity*/
+        printf("HUMI : %lf %% \n", H);
+        printf("ADC event number: %d", p_event->data.done.p_buffer[0]);      
+        printf("\n");
+
+        m_adc_evt_counter++; 
+
+      /* when humidity is over 50%  */
+         if(H >= 50.0) 
+          {
+           printf(" Exceeded 50% humidity \n");
+           nrf_gpio_pin_set(LED);
+          }
+          else
+          { nrf_gpio_pin_clear(LED); }
+    }
+   
+}
+
+
+void saadc_init(void)
+{
+    ret_code_t err_code;
+    nrf_saadc_channel_config_t channel_config_TEMP =                         //variable modified_temperature
+        NRF_DRV_SAADC_DEFAULT_CHANNEL_CONFIG_SE(NRF_SAADC_INPUT_AIN1);  //temperature pin. P0.03(A0)
+
+    nrf_saadc_channel_config_t channel_config_HUMI =                     //variable modified_humidity
+        NRF_DRV_SAADC_DEFAULT_CHANNEL_CONFIG_SE(NRF_SAADC_INPUT_AIN2);  //humidity pin. P0.04(A1)
+
+    err_code = nrf_drv_saadc_init(NULL, saadc_callback);
+    APP_ERROR_CHECK(err_code);
+
+    err_code = nrf_drv_saadc_channel_init(0, &channel_config_TEMP);   //modified
+    APP_ERROR_CHECK(err_code);
+
+    err_code = nrf_drv_saadc_channel_init(1, &channel_config_HUMI);    //modified
+    APP_ERROR_CHECK(err_code);
+
+    err_code = nrf_drv_saadc_buffer_convert(m_buffer_pool[0], SAMPLES_IN_BUFFER);
+    APP_ERROR_CHECK(err_code);
+
+    err_code = nrf_drv_saadc_buffer_convert(m_buffer_pool[1], SAMPLES_IN_BUFFER);
+    APP_ERROR_CHECK(err_code);
+
+}
+
+
+
+
+
+/* iisdlpc function*/
+
+/**@brief Function for TWI (with transaction manager and twi_sensor) initialization.
+ */
+
+
+
+static void twi_init(void)
+{
+    uint32_t err_code;
+    
+    const nrf_drv_twi_config_t ii_config = {
+       .scl                = ARDUINO_SCL_PIN,
+       .sda                = ARDUINO_SDA_PIN,
+       .frequency          = NRF_DRV_TWI_FREQ_100K,
+       .interrupt_priority = APP_IRQ_PRIORITY_MID, // HIGHEST
+       .clear_bus_init     = false
+    };
+
+    err_code = nrf_twi_mngr_init(&m_nrf_twi_mngr, &ii_config);
+    APP_ERROR_CHECK(err_code);
+
+    err_code = nrf_twi_sensor_init(&m_nrf_twi_sensor);
+    APP_ERROR_CHECK(err_code);
+}
+
+/**@brief Function for connection with the iis2dlpc_read_reg function and nrf52840 SDK.
+ * @param[out] return Should be 0.
+ */
+int32_t platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
+{
+ nrf_twi_sensor_reg_read(&m_nrf_twi_sensor, II_ADDR, reg, NULL, bufp, len);
+ nrf_delay_us(1000);
+ NRF_LOG_FLUSH();
+ return 0;
+}
+
+/**@brief Function for connection with the iis2dlpc_write_reg function and nrf52840 SDK.
+ * @param[out] return Should be 0.
+ */
+int32_t platform_write(void *handle, uint8_t reg, uint8_t *bufp, uint16_t len)
+{
+ nrf_twi_sensor_reg_write(&m_nrf_twi_sensor, II_ADDR, reg, bufp, len);  
+ nrf_delay_us(1000);
+ NRF_LOG_FLUSH();
+ return 0;
+}
+
+
+
+ void iis2dlpc_read_data_polling(void)
+{ 
+  
+  /* Initialize mems driver interface */
+  stmdev_ctx_t dev_ctx;
+  dev_ctx.write_reg = platform_write;
+  dev_ctx.read_reg = platform_read;
+  dev_ctx.handle = NULL;
+  /*Initialize platform specific hardware */
+  //platform_init();
+  
+  /* Check device ID */
+  nrf_delay_ms(100);
+
+  iis2dlpc_device_id_get(&dev_ctx, &whoamI);
+  
+  nrf_delay_ms(100);
+
+  if (whoamI != IIS2DLPC_ID)
+    while (1) {
+     /* manage here device not found */// iis2dlpc_device_id_get(&dev_ctx, &whoamI);
+    }
+
+  /*Restore default configuration */
+  iis2dlpc_reset_set(&dev_ctx, PROPERTY_ENABLE);
+
+  do {
+    iis2dlpc_reset_get(&dev_ctx, &rst);
+  } while (rst);
+
+  /* Enable Block Data Update */
+  iis2dlpc_block_data_update_set(&dev_ctx, PROPERTY_ENABLE);
+  /*Set full scale */
+  iis2dlpc_full_scale_set(&dev_ctx, IIS2DLPC_8g);
+  /* Configure filtering chain
+   * Accelerometer - filter path / bandwidth
+   */
+  iis2dlpc_filter_path_set(&dev_ctx, IIS2DLPC_LPF_ON_OUT);
+  iis2dlpc_filter_bandwidth_set(&dev_ctx, IIS2DLPC_ODR_DIV_4);
+  /*Configure power mode */
+  //iis2dlpc_power_mode_set(&dev_ctx, IIS2DLPC_HIGH_PERFORMANCE);
+  iis2dlpc_power_mode_set(&dev_ctx,
+                          IIS2DLPC_CONT_LOW_PWR_LOW_NOISE_12bit);
+  /*Set Output Data Rate */
+  iis2dlpc_data_rate_set(&dev_ctx, IIS2DLPC_XL_ODR_25Hz);
+
+  /*Read samples in polling mode (no int) */
+  while (1) {
+    uint8_t reg;
+    /* Read output only if new value is available */
+    iis2dlpc_flag_data_ready_get(&dev_ctx, &reg);
+
+    if (reg) {
+      /* Read acceleration data */
+      memset(data_raw_acceleration, 0x00, 3 * sizeof(int16_t));
+      iis2dlpc_acceleration_raw_get(&dev_ctx, data_raw_acceleration);
+      acceleration_mg[0] = iis2dlpc_from_fs8_lp1_to_mg(
+                             data_raw_acceleration[0]);
+      acceleration_mg[1] = iis2dlpc_from_fs8_lp1_to_mg(
+                             data_raw_acceleration[1]);
+      acceleration_mg[2] = iis2dlpc_from_fs8_lp1_to_mg(
+                             data_raw_acceleration[2]);
+    
+      sprintf((char *)tx_buffer,
+              "Acceleration [mg]:%4.2f\t%4.2f\t%4.2f\r\n",
+              acceleration_mg[0], acceleration_mg[1], acceleration_mg[2]);
+      //printf("check\n");
+      nrf_delay_ms(1000);
+      printf("%4.2f\t%4.2f\t%4.2f\r\n", acceleration_mg[0], acceleration_mg[1], acceleration_mg[2]);
+    }
+  }
+}
+
+
+
+
+
+\
+
+
+
+/*
+static void sendBle(int control_evt)
+{
+  char msg[7];
+  uint8_t control_msg[7];
+
+
+  sprintf(msg, "%S ", CRIME);
+
+
+  memcpy(control_msg, msg, sizeof(msg));
+  uint16_t length = sizeof(control_msg);
+  ble_nus_data_send(&m_nus, control_msg, &length, m_conn_handle);
+  printf("message = %s\n", control_msg);
+  memset(control_msg, 0, sizeof(msg));
+}
+*/  
+
+
+
+
 /**@brief Application main function.
  */
 int main(void)
@@ -716,10 +1061,37 @@ int main(void)
     NRF_LOG_INFO("Debug logging for UART over RTT started.");
     advertising_start();
 
+
+    /* saadc */
+    saadc_init();
+    saadc_sampling_event_init();
+    saadc_sampling_event_enable();
+
+    NRF_LOG_INFO("SAADC HAL simple example started.");
+    NRF_LOG_FLUSH();
+
+    nrf_gpio_cfg_output(LED); // led output set
+   
+
+    /*ii2dlpc */    
+    
+    printf("\r\nTWI master example started. \r\n");
+    twi_init();  
+    ret_code_t ret_code = nrf_pwr_mgmt_init();
+    APP_ERROR_CHECK(ret_code);
+    iis2dlpc_read_data_polling(); //dlpc enable
+  
+
+    
+
+      
+    
     // Enter main loop.
     for (;;)
-    {
+    {       
         idle_state_handle();
+        nrf_pwr_mgmt_run();
+        NRF_LOG_FLUSH();
     }
 }
 

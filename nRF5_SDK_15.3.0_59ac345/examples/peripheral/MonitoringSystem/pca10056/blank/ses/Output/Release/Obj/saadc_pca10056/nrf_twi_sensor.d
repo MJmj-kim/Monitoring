@@ -1,6 +1,6 @@
 Output/Release/Obj/saadc_pca10056/nrf_twi_sensor.o: \
- C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\twi_sensor\nrf_twi_sensor.c \
- C:\Monitoring\nRF5_SDK_15.3.0_59ac345\components\libraries\twi_sensor\nrf_twi_sensor.h \
+ C:\nRF5_SDK_15.3.0_59ac345\examples\peripheral\twi_master_ADSL345\Segger\ Example\components\libraries\twi_sensor\nrf_twi_sensor.c \
+ C:\nRF5_SDK_15.3.0_59ac345\examples\peripheral\twi_master_ADSL345\Segger\ Example\components\libraries\twi_sensor\nrf_twi_sensor.h \
  ../../../../../../components/libraries/twi_mngr/nrf_twi_mngr.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20/include/stdint.h \
  ../../../../../../integration/nrfx/legacy/nrf_drv_twi.h \
