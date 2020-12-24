@@ -106,8 +106,6 @@ typedef struct
     void *                p_context;          ///< Context passed to interrupt handler.
 } nrfx_timer_config_t;
 
-
-
 /**
  * @brief Timer driver instance default configuration.
  */

@@ -37,6 +37,7 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
@@ -62,6 +63,10 @@
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
 
+#include "nrf_delay.h"
+#include "nrf_calendar.h"
+
+#include "main.h"
 
 #define APP_BLE_CONN_CFG_TAG    1                                       /**< Tag that refers to the BLE stack configuration set with @ref sd_ble_cfg_set. The default tag is @ref BLE_CONN_CFG_TAG_DEFAULT. */
 #define APP_BLE_OBSERVER_PRIO   3                                       /**< BLE observer priority of the application. There is no need to modify this value. */
@@ -80,6 +85,250 @@ BLE_DB_DISCOVERY_DEF(m_db_disc);                                        /**< Dat
 NRF_BLE_SCAN_DEF(m_scan);                                               /**< Scanning Module instance. */
 
 static uint16_t m_ble_nus_max_data_len = BLE_GATT_ATT_MTU_DEFAULT - OPCODE_LENGTH - HANDLE_LENGTH; /**< Maximum length of data (in bytes) that can be transmitted to the peer by the Nordic UART service module. */
+
+
+///
+/// Heo
+///
+static bool at_send(uint8_t * data, uint16_t size) {
+
+    memset(temp_array,0,BLE_NUS_MAX_DATA_LEN);
+    temp_current = temp_array;
+
+    ret_code_t ret_val;
+
+    //NRF_LOG_DEBUG("Receiving data.");
+    //NRF_LOG_HEXDUMP_DEBUG(p_data, data_len);
+
+    for (uint16_t i = 0; i < size; i++) {
+        do {
+            ret_val = app_uart_put(data[i]);
+
+            //printf("%c",data[i]);
+
+            if ((ret_val != NRF_SUCCESS) && (ret_val != NRF_ERROR_BUSY)) {
+                //NRF_LOG_ERROR("app_uart_put failed for index 0x%04x.", i);
+                APP_ERROR_CHECK(ret_val);
+            }
+        } while (ret_val == NRF_ERROR_BUSY);
+    }
+
+    nrf_delay_ms(1000);
+
+    return true;
+}
+
+
+uint32_t checkMsg(char* src, char* pattern, int time, bool qcds_check, int length) {
+    struct tm* start, *end;
+    start = nrf_cal_get_time_calibrated();
+
+    if (qcds_check) {
+	while (strstr(src, pattern) == NULL) {
+	    //for(int i=0; i<10; i++) {
+            //  if(i==9) {
+            //  return sd_nvic_SystemReset();
+            // }
+              lte_check();
+            //}
+	    end = nrf_cal_get_time_calibrated();
+	    if ((end->tm_min - start->tm_min) >= time){
+            return sd_nvic_SystemReset(); // reset function should be implemented
+            }
+	}
+	return 1;
+    }
+
+    // while loop to wait 5min (get time and check wether it is over 5min, if it is over 5min, reset the device)
+    while (strlen(src) <= length) {
+	end = nrf_cal_get_time_calibrated();
+	if ((end->tm_min - start->tm_min) >= time) return sd_nvic_SystemReset(); // reset function should be implemented
+    }
+    if (strstr(src, pattern) == NULL) {
+    return sd_nvic_SystemReset();
+    }
+    return 1;
+}
+
+
+uint32_t checkMsgMQTT(char* src, char* pattern, int time, int length) {
+    struct tm* start, *end;
+    start = nrf_cal_get_time_calibrated();
+
+    while (strlen(src) <= length) {
+	end = nrf_cal_get_time_calibrated();
+	if ((end->tm_sec - start->tm_sec) >= time) return 0; 
+    }
+    if (strstr(src, pattern) == NULL) {
+    return 0;
+    }
+    return 1;
+}
+
+
+void lte_check(void) {
+    
+    at_send("AT+QCDS\r", 9);
+    checkMsg(temp_array, "\"SRV\"", 1, true, 1);
+}
+
+
+void lte_setup(void) {
+     
+  at_send("AT+QMTCONN?\r", 13); 
+  if(!checkMsgMQTT(temp_array, "+QMTCONN: 0,3", 10, 1)) {
+  
+    at_send("AT+QMTCLOSE=0\r", 15);
+    if(checkMsgMQTT(temp_array, "ERROR", 10, 4)||checkMsgMQTT(temp_array, "+QMTCLOSE: 0,0", 10, 30)) {
+
+      at_send("AT+QMTCFG=\"SSL\",0,1,2\r",25);
+      checkMsg(temp_array, "OK", 10, false, 1);
+
+      at_send("AT+QMTCFG=\"version\",0,4\r", 27);  
+      checkMsg(temp_array, "OK", 10, false, 1);
+
+      at_send("AT+QSSLCFG=\"cacert\",2,\"root.pem\"\r",38);
+      checkMsg(temp_array, "OK", 10, false, 1);
+
+      at_send("AT+QSSLCFG=\"clientcert\",2,\"cert.pem\"\r", 42);
+      checkMsg(temp_array, "OK", 10, false, 1);
+
+      at_send("AT+QSSLCFG=\"clientkey\",2,\"key.pem\"\r", 40);
+      checkMsg(temp_array, "OK", 10, false, 1);
+
+      at_send("AT+QSSLCFG=\"seclevel\",2,2\r", 29);
+      checkMsg(temp_array, "OK", 10, false, 1);
+
+      at_send("AT+QSSLCFG=\"sslversion\",2,4\r", 31);
+      checkMsg(temp_array, "OK", 10, false, 1);
+ 
+      at_send("AT+QSSLCFG=\"ciphersuite\",2,0xffff\r", 37);
+      checkMsg(temp_array, "OK", 10, false, 1);
+
+      at_send("AT+QSSLCFG=\"ignorelocaltime\",1\r", 34);
+      checkMsg(temp_array, "OK", 10, false, 1);
+
+      at_send("AT+QMTOPEN=0,\"avq1xsl5cm8b-ats.iot.us-west-2.amazonaws.com\",8883\r", 68);
+      checkMsg(temp_array, "+QMTOPEN: 0,0", 10, false, 85);                    
+
+      at_send("AT+QMTCONN=0,\"mqtttest\"\r", 27);
+      checkMsg(temp_array, "+QMTCONN: 0,0,0", 10, false, 40);     
+    }
+  }
+}
+
+
+void sendlte(uint8_t * data)
+{
+    at_send("AT+QMTPUB=0,1,1,0,\"topic\"\r", 29);
+    at_send(data, strlen(data));
+    app_uart_put('\r');
+    app_uart_put(0x1A);
+    app_uart_put('\r');
+    nrf_delay_ms(5000);
+
+    return;
+}
+
+
+
+static void lte_timer_handler(void * p_context) {
+
+  printf("%d, %d, %d\n", MASTER_MAP[0], MASTER_MAP[1], MASTER_MAP[2]);
+  rptevt(MASTER_MAP);
+  resetmap(MASTER_MAP);
+
+}
+
+
+static void create_timer(void) {
+
+    ret_code_t err_code;
+    err_code = app_timer_create(&m_lte_timer_id,
+                                APP_TIMER_MODE_REPEATED,
+                                lte_timer_handler);
+    APP_ERROR_CHECK(err_code);
+
+}
+
+
+static void start_lte_timer(void) {
+
+    ret_code_t err_code;
+    err_code = app_timer_start(m_lte_timer_id, APP_TIMER_TICKS(300000), NULL); //300000 (5min)
+    APP_ERROR_CHECK(err_code);
+       
+}
+
+
+void setmap(uint8_t (*map), int num) {
+
+  map[num] = 1;
+
+}
+void clearmap(uint8_t (*map), int num) {
+
+  map[num] = 0;
+
+}
+void resetmap(uint8_t (*map)) {
+  for(int i = 0; i < BLE_EVT_COUNT; i++) {
+    clearmap(map, i);
+  }
+}
+int checkmap(uint8_t (*map), int event) {
+  if(map[event]==0) {
+    return 0;
+  }
+  else return 1;
+}
+void rptevt(uint8_t (*map)) {
+  char msg[100];
+  char* msg_current=msg;
+  bool flag = false;
+
+
+    for(int i=0;i<BLE_EVT_COUNT; i++) {
+      if(checkmap(map, i)==0) {
+        msg_current += sprintf(msg_current,"%d", 0);
+      }
+      else {
+        msg_current += sprintf(msg_current,"%d", 1);
+      } 
+    }
+
+    flag = true;
+
+    if(flag) {
+      
+      //sendlte("I am not a robot");
+      nrf_delay_ms(3000);
+      sendlte(msg);
+ 
+      return;
+    
+    }
+}
+
+
+void readBleHeo(uint8_t* msg) {
+  
+  int num = *msg - 48;
+
+  setmap(MASTER_MAP,num);
+  
+  printf("%d, %d, %d\n", MASTER_MAP[0], MASTER_MAP[1], MASTER_MAP[2]);
+  
+  rptevt(MASTER_MAP);
+  
+  //printf("second  %d, %d, %d ", MASTER_MAP[0], MASTER_MAP[1], MASTER_MAP[2]);
+  
+}
+///
+/// Heo
+///
+
+
 
 /**@brief NUS UUID. */
 static ble_uuid_t const m_nus_uuid =
@@ -197,11 +446,13 @@ static void db_disc_handler(ble_db_discovery_evt_t * p_evt)
 }
 
 
+
 /**@brief Function for handling characters received by the Nordic UART Service (NUS).
  *
  * @details This function takes a list of characters of length data_len and prints the characters out on UART.
  *          If @ref ECHOBACK_BLE_UART_DATA is set, the data is sent back to sender.
  */
+ /*
 static void ble_nus_chars_received_uart_print(uint8_t * p_data, uint16_t data_len)
 {
     ret_code_t ret_val;
@@ -239,6 +490,7 @@ static void ble_nus_chars_received_uart_print(uint8_t * p_data, uint16_t data_le
         } while (ret_val == NRF_ERROR_BUSY);
     }
 }
+*/
 
 
 /**@brief   Function for handling app_uart events.
@@ -262,19 +514,16 @@ void uart_event_handle(app_uart_evt_t * p_event)
 
             if ((data_array[index - 1] == '\n') || (index >= (m_ble_nus_max_data_len)))
             {
-                NRF_LOG_DEBUG("Ready to send data over BLE NUS");
-                NRF_LOG_HEXDUMP_DEBUG(data_array, index);
-
-                do
+                //NRF_LOG_DEBUG("Ready to send data over BLE NUS");
+                //NRF_LOG_HEXDUMP_DEBUG(data_array, index);
+                 if(index >= 1)
                 {
-                    ret_val = ble_nus_c_string_send(&m_ble_nus_c, data_array, index);
-                    if ( (ret_val != NRF_ERROR_INVALID_STATE) && (ret_val != NRF_ERROR_RESOURCES) )
-                    {
-                        APP_ERROR_CHECK(ret_val);
-                    }
-                } while (ret_val == NRF_ERROR_RESOURCES);
-
-                index = 0;
+                    //NRF_LOG_INFO("%s", NRF_LOG_PUSH(data_array));
+                    temp_current += sprintf(temp_current, "%s", data_array);
+                    //printf("data=%s\n", data_array);
+                    memset(data_array,0,BLE_NUS_MAX_DATA_LEN);
+                    index = 0;
+                }    
             }
             break;
 
@@ -321,7 +570,8 @@ static void ble_nus_c_evt_handler(ble_nus_c_t * p_ble_nus_c, ble_nus_c_evt_t con
             break;
 
         case BLE_NUS_C_EVT_NUS_TX_EVT:
-            ble_nus_chars_received_uart_print(p_ble_nus_evt->p_data, p_ble_nus_evt->data_len);
+            readBleHeo(p_ble_nus_evt->p_data);
+            //ble_nus_chars_received_uart_print(p_ble_nus_evt->p_data, p_ble_nus_evt->data_len);
             break;
 
         case BLE_NUS_C_EVT_DISCONNECTED:
@@ -548,7 +798,7 @@ static void uart_init(void)
                        UART_RX_BUF_SIZE,
                        UART_TX_BUF_SIZE,
                        uart_event_handle,
-                       APP_IRQ_PRIORITY_LOWEST,
+                       APP_IRQ_PRIORITY_HIGHEST,
                        err_code);
 
     APP_ERROR_CHECK(err_code);
@@ -630,6 +880,8 @@ static void idle_state_handle(void)
 }
 
 
+
+
 int main(void)
 {
     // Initialize.
@@ -646,12 +898,22 @@ int main(void)
 
     // Start execution.
     printf("BLE UART central example started.\r\n");
-    NRF_LOG_INFO("BLE UART central example started.");
+    printf("%d, %d, %d ", MASTER_MAP[0], MASTER_MAP[1], MASTER_MAP[2]);
     scan_start();
+    
+    //Heo
+    lte_check();
+    lte_setup();
+    sendlte("I am a robot");
+    
+    create_timer();
+    start_lte_timer();
+    //Heo
+
 
     // Enter main loop.
     for (;;)
-    {
+    {   
         idle_state_handle();
     }
 }

@@ -62,7 +62,7 @@ extern "C" {
  * 16 bytes were selected so that nrf_twi_sensor_write_cmd_t size
  * matches nrf_twi_sensor_read_cmd_t size.
  */
-#define NRF_TWI_SENSOR_SEND_BUF_SIZE   255
+#define NRF_TWI_SENSOR_SEND_BUF_SIZE   16
 
 /**
  * @brief Register read callback prototype.

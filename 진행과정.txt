@@ -1,0 +1,19 @@
+우선순위 설정 잘못돼서 이틀 허비
+
+ble_nus_chars_received_uart_print 부분 삭제
+
+1. void uart_event_handle 함수에 uart_get 추가해서 temp_array로 값 저장
+   index선언시 uint16_t(기본)/uint8_t(회사) ???
+2. static bool at_send 함수에 temp_array 초기화 및 uart_put 추가
+3. uint32_t checkMsg
+4. uint32_t checmMsgMQTT
+5. void lte_check
+6. void lte_setup
+7. void sendlte
+8. Master_Map 관련 함수
+   void setmap
+   void clearmap
+   void resetmap
+   int checkmap
+9. void rptevt
+10. void readBleHeo
